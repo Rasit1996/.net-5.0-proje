@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "RolEkle";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@using CoreDemo.Models
+@model RoleModel
+<form class="form-group" action="/Admin/AdminRol/RolEkle" method="post">
+     <div class="form-control">
+         <label>Ad:</label>
+         <input type="text" class="form-control" name="name" />
+         @Html.ValidationMessageFor(x=>x.name,"", new {@style="color:red"})
+     </div>   
+     @Html.ValidationSummary(true,"",new {@style="color:red"})
+     <input type="submit" class="btn btn-warning" value="Kaydet" />
+</form>
+

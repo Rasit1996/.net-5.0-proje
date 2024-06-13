@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+@using CoreDemo.Models
+@model SubIdentityUser
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Register</title>
+
+    <link href="/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/Admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/Admin/css/animate.css" rel="stylesheet">
+    <link href="/Admin/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">MRK</h1>
+
+            </div>
+            <h3>MRK'ya kaydol!</h3>
+            <p>Uygulamayı görmek için hesap oluşturun.</p>
+            <form class="m-t" role="form" method="post" action="/IdentityKayit/Index">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Ad" name="Adi">
+                </div>
+                div class="form-group">
+                <input type="text" class="form-control" placeholder="Soyad" name="Soyadi">
+        </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" name="Email" >
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Sifre" name="Sifre" >
+                </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Sifre Tekrar" name="SifreTekrar">
+            @Html.ValidationMessageFor(x=>x.SifreTekrar,"",new {@style="color:red"})
+          
+        </div>
+                <div class="form-group">
+                    <div class="checkbox i-checks"><label> <input type="checkbox" name="kabul"><i></i> Kullanım koşullarını kabul ediyorum </label></div>
+                    @Html.ValidationSummary(true,"",new {@style="color:red"})
+                    @if (ViewBag.hata!=null)
+            {
+                <spans style="color:red" >@ViewBag.hata</spans>
+            }
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Kaydol</button>
+
+        <p class="text-muted text-center"><small>Zaten bir hesabın var mı?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="login.html">Login</a>
+            </form>
+            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/Admin/js/jquery-3.1.1.min.js"></script>
+    <script src="/Admin/js/popper.min.js"></script>
+    <script src="/Admin/js/bootstrap.js"></script>
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+</body>
+
+</html>
+

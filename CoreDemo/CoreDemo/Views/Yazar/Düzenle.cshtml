@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Düzenle";
+    Layout = "~/Views/Shared/Yazar_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model Blok
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Basic form elements</h4>
+            <p class="card-description"> Basic form elements </p>
+            <form class="forms-sample" action="/Yazar/Düzenle" method="post">
+                <div class="form-group">
+                    <label for="exampleInputName1">Başlık</label>
+                    <input type="text" class="form-control" id="exampleInputName1" name="Baslik" value="@Model.Baslik">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Kategori</label>
+                    <select class="form-control" id="exampleFormControlSelect2" name="KategoriID">
+
+                        <option value="@Model.kategori.ID" >@Model.kategori.Adi</option>
+                        @foreach (Kategori item in ViewBag.kat)
+                        {
+                            <option value="@item.ID">@item.Adi</option>
+                        }
+                    </select>
+                </div>
+                
+                
+                
+                
+                <div class="form-group">
+                    <label for="exampleTextarea1">İçerik</label>
+                    <input type="text" class="form-control" id="exampleTextarea1" name="İcerik" value="@Model.İcerik"  rows="7"></input>
+                </div>
+                <input type="hidden" name="OlusturmaTarihi" value="@Model.OlusturmaTarihi" />
+                <input type="hidden" name="ID" value="@Model.ID" />
+                <input type="hidden" name="UserID" value="@Model.UserID" />
+                <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
+                <a class="btn  btn-info" href="/Yazar/Bloglarım" class="btn btn-light">İptal</a>
+            </form>
+        </div>
+    </div>
+</div>
+

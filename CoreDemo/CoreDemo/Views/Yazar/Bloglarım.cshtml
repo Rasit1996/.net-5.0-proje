@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewData["Title"] = "Bloglarım";
+    Layout = "~/Views/Shared/Yazar_Layout.cshtml";
+}
+
+@section head{
+    
+}
+@using EntityLayer.Entity
+@model List<Blok>
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Bloglarım</h4>
+            <div class="table-responsive">
+                @if (Model.Count==0)
+                {
+                    <h1>Henüz hiç bloğunuz yok. İlk bloğunuzu ekleyin!</h1>
+                    <br />
+                    <a href="/Yazar/BlogEkle" class="btn btn-primary">Blog Ekle</a>
+                }
+                else{
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Blog Başlığı </th>
+                            <th> Oluşturma Tarihi </th>
+                            <th> Kategori </th>
+                            <th> Durum </th>
+                            <th> Sil </th>
+                            <th>Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.Baslik </td>
+                                <td>@item.OlusturmaTarihi.ToString("dd MMM yyyy")</td>
+                                <td>@item.kategori.Adi</td>
+                                <td>@item.Durum</td>
+                                <td><a href="#" data-id="@item.ID" class="btn btn-danger sil"
+                                    onclick="Onay()">Sil</a></td>
+                                <td><a href="/Yazar/Düzenle/@item.ID" class="btn btn-info">Düzenle</a></td>
+                            </tr>
+
+                            }
+                            
+                         </tbody>
+                </table>
+                <br />
+                    <a href="/Yazar/BlogEkle" class="btn btn-primary">Yeni Blog Ekle</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function Onay() {
+           
+            Swal.fire({
+                title: "Simek İstediğine Emin Misin?",
+                text: "Bunu geri alamazsınız!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText:"İptal",
+                confirmButtonText: "Evet, Sil!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(".sil").data("id");
+                    $.ajax({
+                        type: "POST",
+                        url: "/Yazar/Sil/" + id,
+                        success: function () {
+                            Swal.fire({
+                                title: "Silindi!",
+                                text: "Dosyanız silindi.",
+                                icon: "success",
+                                confirmButtonText:"Tamam"
+                            }).then((result)=> { 
+                                if(result.isConfirmed){
+                                    location.reload();
+                                }
+                            });
+                            
+                            
+                        },
+                        error: function () {
+                            alert("Hata!");
+                        }
+                    })
+                   
+                }
+            });
+          
+            
+        }
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="form form-group">
+    <form action="/Admin/Api/Ekle" method="post">
+        <label>Adı:</label>
+        <br />
+        <input type="text" name="Adi" class="form-control" />
+        <br />
+        <input type="submit" class="btn btn-success" value="Ekle" />
+        </form>
+</div>
+

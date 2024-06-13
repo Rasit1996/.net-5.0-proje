@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model List<Blok>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+
+            <div class="col-md-3">
+                <div class="ibox">
+                    <div class="ibox-content product-box">
+
+                        <div  class="product-imitation" >
+                            <img src="@item.ImageUrl" class="card-img-top img-fluid" alt="">
+                        </div>
+                        <div class="product-desc">
+                            <span class="product-price">
+                                @item.OlusturmaTarihi.ToShortDateString()
+                            </span>
+                            <small class="text-muted">@item.kategori.Adi</small>
+                            <a href="#" class="product-name"> @item.Baslik  </a>    
+
+
+
+                            <div class="small m-t-xs">
+                                @if (item.İcerik!=null)
+                                {
+                                    @item.İcerik    
+                                }
+                               
+                            </div>
+                            <div class="m-t text-righ">
+
+                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+
+    </div>
+    
+    
+
+
+
+
+</div>
+

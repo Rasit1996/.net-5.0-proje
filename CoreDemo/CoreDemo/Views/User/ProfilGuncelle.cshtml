@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "ProfilGuncelle";
+    Layout = "~/Views/Shared/Yazar_Layout.cshtml";
+}
+
+@using EntityLayer.Entity
+@model AppUser
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Profil Sayfası</h4>
+            <p class="card-description">Profil Bilgileriniz. </p>
+            <form action="/User/ProfilGuncelle" method="post" enctype="multipart/form-data" class="forms-sample">
+               
+                <div class="form-group">
+                    <label for="exampleInputName1">Adı</label>
+                    <input type="text" class="form-control" id="exampleInputName1" name="UserName" value="@Model.UserName" placeholder="">
+                    @Html.ValidationMessageFor(x => x.UserName, "", new { @style = "color:red" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Soyadı</label>
+                    <input type="text" class="form-control" id="exampleInputName1" name="SurName" value="@Model.SurName" placeholder="">
+                    @Html.ValidationMessageFor(x => x.SurName, "", new { @style = "color:red" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Email adresi</label>
+                    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="" name="Email" value="@Model.Email">
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @style = "color:red" })
+                </div>
+                 <div class="form-group">
+                <label for="exampleInputPassword4">Şifre</label>
+                <input type="password" class="form-control" id="exampleInputPassword4" name="Sifre" placeholder="" >
+                
+                </div> 
+                 <div class="form-group">
+                <label for="exampleInputPassword4">Şifre Tekrar</label>
+                <input type="password" class="form-control" id="exampleInputPassword4" name="SifreTekrar" placeholder="" >
+                @if (ViewBag.sifre!=null)
+                    {
+                       <label style="color:red">@ViewBag.sifre</label> 
+                    }
+                </div>
+                <div class="form-group">
+                   
+                    <input type="checkbox" class="check-link"  id="exampleInputPassword4" name="checkbox" placeholder="">
+                    <span>Şifremi değiştirmek istiyorum</span>
+                   
+                </div>
+                <div class="form-group">
+                    <label>Resim Yükle</label>
+                    <input type="file" name="Image" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Dosya Seç">
+                        <span class="input-group-append">
+                            <input type="file" class="file-upload-browse btn btn-gradient-primary" name="Image">
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleTextarea1">Hakkında</label>
+                    @* <input type="text" class="form-control" style="height:100px" name="Hakkinda" value="@Model.Hakkinda" > *@
+                    @Html.TextAreaFor(x => x.Hakkinda, 10, 3, new { @class = "form-control" })
+                    @* @Html.ValidationMessageFor(x => x.Hakkinda, "", new { @style = "color:red" }) *@
+                    @Html.ValidationSummary(true, "", new { @style = "color:red" })
+
+                </div>
+                @if (ViewBag.hata != null)
+                {
+                    <label style="color:red">@ViewBag.hata</label>
+                    <br />
+                }
+                <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
+                <a href="/Yazar/Profilim" class="btn btn-light">iptal</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+

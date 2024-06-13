@@ -1,0 +1,65 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using EntityLayer.Entity
+@model List<Kategori>
+@using DataAccessLayer.Context
+@{
+    BContext ctx = new BContext();
+}
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Kategori bilgileri</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Adı </th>
+                                <th> Durum </th>
+                                <th> Puan Göstergesi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int adet=0;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                double puan = ctx.kategoriPuans.SingleOrDefault(x => x.KategoriID == item.ID).KatTopPuan;
+                                double adet2 = ctx.kategoriPuans.SingleOrDefault(x => x.KategoriID == item.ID).KatPuanlamaAdet;
+                                double ort;
+                                if (adet2!=0)
+                                {
+                                    ort = (puan / adet2);
+                                    ort =(int) (ort * 10);
+                                }
+                                else
+                                {
+                                    ort = 0;
+                                }
+                                adet++;
+                                <tr>
+                                    <td> @adet</td>
+                                    <td> @item.Adi </td>
+                                    <td> @item.Durum </td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-gradient-success" role="progressbar" style="width: @ort%" aria-valuenow="@ort" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Bildirimler";
+    Layout = "~/Views/Shared/Yazar_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model List<Bildirim>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bildirimlerin</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Konu </th>
+                                <th> İçerik </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int adet = 0;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                
+                                adet++;
+                                <tr>
+                                    <td> @adet</td>
+                                    <td> @item.Konu </td>
+                                    <td> @item.Icerik </td>
+                                    
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

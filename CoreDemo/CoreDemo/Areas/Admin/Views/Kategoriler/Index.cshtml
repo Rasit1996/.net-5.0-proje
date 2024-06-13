@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model List<Kategori>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Kategoriler Tablosu  </h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Kategori</th>
+                            <th>Sil</th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ID</td>
+                                <td>@item.Adi</td>
+                                <td> <a href="#" data-itemid="@item.ID" class="btn btn-outline-danger sil">Sil</a></td>
+                                
+
+
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+
+                </table>
+                <a href="/Admin/Kategoriler/Ekle" class="btn btn-info">Yeni Kategori Ekle</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(".sil").click(function () {
+            var id = $(this).data("itemid");
+            Swal.fire({
+                title: "Emin misiniz??",
+                text: "Bu işlem geri alınamaz!",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonText: "İptal",
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+
+                confirmButtonText: "Evet, sil!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Admin/Kategoriler/Sil/" + id,
+                        success: function () {
+                            Swal.fire({
+                                title: "Silindi!",
+                                text: "Dosyanız silindi.",
+                                icon: "success",
+                                confirmButtonText: "Tamam"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        },
+                        error: function () {
+                            alert("hata");
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+}
+
+

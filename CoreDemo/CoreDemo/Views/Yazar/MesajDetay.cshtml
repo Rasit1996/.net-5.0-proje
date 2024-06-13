@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "MesajDetay";
+    Layout = "~/Views/Shared/Yazar_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model MesajUser
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Mesaj Detay Sayfası</h4>
+            @if(ViewBag.tip == "detay")
+            {               
+          
+            <p class="card-description">@Model.Gonderen.UserName kişinin Mesajı </p>
+            <div class="forms-sample">
+                <div class="form-group">
+                    <label for="exampleInputName1">Adı</label>
+                    <input type="text" class="form-control" id="exampleInputName1" value="@Model.Gonderen.UserName" readonly placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Soyadı</label>
+                    <input type="text" class="form-control" id="exampleInputName1" value="@Model.Gonderen.SurName" readonly placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Email adresi</label>
+                    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="" value="@Model.Gonderen.Email" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Konu</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="" value="@Model.Konu" readonly>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="exampleTextarea1">Mesaj</label>
+                    <textarea class="form-control" rows="4" readonly>@Model.Icerik</textarea>
+                </div>
+                
+                <a href="/Yazar/gelenmesajlar" class="btn btn-info">Geri</a>
+                </div>
+            }
+            else
+            {
+                <p class="card-description">@Model.Alici.UserName kişisine gönderilen mesaj </p>
+                <div class="forms-sample">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Adı</label>
+                        <input type="text" class="form-control" id="exampleInputName1" value="@Model.Alici.UserName" readonly placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Soyadı</label>
+                        <input type="text" class="form-control" id="exampleInputName1" value="@Model.Alici.SurName" readonly placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Email adresi</label>
+                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="" value="@Model.Alici.Email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Konu</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="" value="@Model.Konu" readonly>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Mesaj</label>
+                        <textarea class="form-control" rows="4" readonly>@Model.Icerik</textarea>
+                    </div>
+
+                    <a href="/Yazar/gidenmesajlar" class="btn btn-info">Geri</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

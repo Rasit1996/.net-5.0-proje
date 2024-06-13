@@ -1,0 +1,68 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using DataAccessLayer.Context
+@using EntityLayer.Entity
+@model List<Blok>
+@{
+    BContext ctx = new BContext();
+}
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bloglarım</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Başlık </th>
+                                <th> Kategori </th>
+                                <th> Oluşturma Tarihi </th>
+                                <th> Detaylar </th>
+                                <th>Puan Göstergesi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                int puan = ctx.blogPuans.SingleOrDefault(x => x.BlogID == item.ID).BlogTopPuan;
+                                int adet = ctx.blogPuans.SingleOrDefault(x => x.BlogID == item.ID).BlogPuanlamaAdet;
+                                double ort;
+                                if (adet != 0)
+                                {
+                                    ort = (puan / adet);
+                                    @* nt ort2 = (int)(ort * 10); *@
+                                    ort = (int)(ort * 10);
+                                }
+                                else
+                                {
+                                     ort = 0;
+                                }
+                                <tr>
+                                    <td>
+                                        <img src="@item.ImageUrl" class="mr-2" alt="image">
+                                    </td>
+                                    <td> @item.Baslik </td>
+                                    <td>
+                                        <label class="badge badge-gradient-success">@item.kategori.Adi</label>
+                                    </td>
+                                    <td> @item.OlusturmaTarihi.ToString("dd MMM yyyy") </td>
+                                    <td> <a href="/Blok/Detaylar/@item.ID" class="btn btn-info" >Detaylar</a> </td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-gradient-success" role="progressbar" style="width: @ort%" aria-valuenow="@ort" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

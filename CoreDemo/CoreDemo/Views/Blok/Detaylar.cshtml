@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "Detaylar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EntityLayer.Entity.Blok
+<section class="banner-bottom">
+	<!--/blog-->
+	<div class="container">
+		<div class="row">
+			<!--left-->
+			<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+				<div class="blog-grid-top">
+					<div class="b-grid-top">
+						<div class="blog_info_left_grid">
+							<a href="single.html">
+								<img src="/CoreBlogTema/web/images/1.jpg" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="blog-info-middle">
+							<ul>
+								<li>
+									<a href="#">
+										<i class="far fa-calendar-alt"></i> FEB 15,2018
+									</a>
+								</li>
+								<li class="mx-2">
+									<a href="#">
+										<i class="far fa-thumbs-up"></i> 201 Likes
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="far fa-comment"></i> 15 Comments
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+
+					<h3>
+						<a href="single.html">@Model.Baslik</a>
+					</h3>
+					<p>
+						@Model.İcerik
+					</p>
+					<a href="#" class="btn btn-primary read-m" id="t">Devamını Oku</a>
+				</div>
+
+
+				<div class="comment-top">
+					@await Component.InvokeAsync("BlogYorum", new { id = ViewBag.blog })
+				</div>
+				
+				
+
+				<div class="comment-top">
+					<h4>Bir Yorum Yapın</h4>
+					<div class="comment-bottom">
+						<form id="form2">
+							<input class="form-control" type="text" name="KullaniciAdi" placeholder="Name" required="">
+							<input class="form-control" type="email" name="Baslik" placeholder="Email" required="">
+
+							<input class="form-control" type="text" name="Subject" placeholder="Subject" required="">
+							<input type="hidden" name="BlokID" value="@ViewBag.blog" />
+							<textarea class="form-control" name="Icerik" placeholder="Message..." required=""></textarea>
+							<button type="submit" class="btn btn-primary submit">Gönder</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!--//left-->
+			<!--right-->
+			<aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+				<div class="right-blog-info text-left">
+			@await Html.PartialAsync("/Views/Blok/Abone.cshtml")
+			@await Component.InvokeAsync("BlogSol",new {id=ViewBag.yazar})
+				</div>
+
+			</aside>
+
+			<!--//right-->
+		</div>
+	</div>
+</section>
+
+@section script{
+
+
+
+	<script>
+		
+			
+			$("#form").submit(function () {
+				event.preventDefault();
+				const data = $(this).serialize();
+
+				$.ajax({
+					type: 'POST', // HTTP yöntemi
+					url: '/Blok/Abone', // Belirlenmiş URL
+					data: data, // Gönderilecek veriler
+					
+					success: function(){
+						
+						alert("başarılı");
+					},
+					error: function () {
+						alert("hata");
+					}
+		         })
+			
+		})
+
+		$("#form2").submit(function () {
+			event.preventDefault();
+			const data = $(this).serialize();
+
+			$.ajax({
+				type:"POST",
+				url:"/Blok/Yorum",
+				data:data,
+				success: function () {
+					alert("başarlı");
+					window.location.replace("/Blok/Detaylar/@ViewBag.blog")
+					
+				},
+				error: function () {
+					alert("hata");
+				}
+			})
+		})
+	</script>
+}

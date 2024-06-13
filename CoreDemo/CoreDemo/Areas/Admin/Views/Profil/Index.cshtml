@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model AppUser
+<div class="col-md-4">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Profil Detayları</h5>
+        </div>
+        <div>
+            <div class="ibox-content no-padding border-left-right">
+                <img alt="image" class="img-fluid" src="@Model.ImageUrl">
+            </div>
+            <div class="ibox-content profile-content">
+                <h4><strong>@Model.UserName @Model.SurName</strong></h4>
+                <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+                <h5>
+                    Hakkımda
+                </h5>
+                <p>
+                    @Model.Hakkinda
+                </p>
+                <div class="row m-t-lg">
+                    <div class="col-md-4">
+                        <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
+                        <h5><strong>169</strong> Posts</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="line">5,3,9,6,5,9,7,3,5,2</span>
+                        <h5><strong>28</strong>Takip edilen</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
+                        <h5><strong>240</strong>Takipçi</h5>
+                    </div>
+                </div>
+                <div class="user-button">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="/Admin/Mesaj/Olustur" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i>Mesaj gönder</a>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

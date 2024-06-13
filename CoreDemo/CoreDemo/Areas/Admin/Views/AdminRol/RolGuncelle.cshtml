@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "RolGuncelle";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@using CoreDemo.Areas.Admin.Models
+@model List<RoleIslemi>
+@{
+    int i = 0;
+}
+<form class="form-group" action="/Admin/AdminRol/RolGuncelle" method="post">
+        @foreach (var item in Model)
+    {
+        <input type="hidden" value="@item.RoleID" name="[@i].RoleID" />
+        @if (item.durum)
+        {
+            <input type="checkbox" name="[@i].durum" value="true" checked />
+        }
+        else
+        {
+            <input type="checkbox" name="[@i].durum" value="true" />
+        }
+        <label>@item.name</label>
+        <br />
+        <input type="hidden" name="[@i].name" value="@item.name" />
+        i++;
+    }
+    @Html.ValidationSummary(true,"",new {@style="color:red"})
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a href="/Admin/AdminRol/usersRoles" class="btn btn-warning">Geri git</a>
+    </form>
+

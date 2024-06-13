@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "Olustur";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@section head{
+    <link href="/Admin/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        @await Html.PartialAsync("/Areas/Admin/Views/Mesaj/SolMenu.cshtml")
+<div class="col-lg-9 animated fadeInRight">
+    <div class="mail-box-header">
+        <div class="float-right tooltip-demo">
+            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Taslak   </a>
+            <a href="mailbox.html" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i>İptal</a>
+        </div>
+        <h2>
+            Mesaj oluştur
+        </h2>
+    </div>
+
+
+            <form method="post" action="/Admin/Mesaj/Olustur">
+    <div class="mail-box">
+
+
+        <div class="mail-body">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Kime:</label>
+
+                    <div class="col-sm-10"><input type="text" class="form-control" name="email" value=""></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Konu:</label>
+
+                    <div class="col-sm-10"><input type="text" class="form-control" name="Konu" value=""></div>
+                    <label class="col-sm-2 col-form-label">Mesaj:</label>
+                </div>
+                        <div class="mail-text h-200">
+
+                            <div class="summernote">
+                                    
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <input type="hidden" name="Icerik" id="mesaj" />
+         
+
+        </div>
+
+                    @if (ViewBag.hata != null)
+                    {
+                        <span style="color:red">@ViewBag.hata</span>
+                    }
+                    <div class="mail-body text-right tooltip-demo">
+            <input type="submit" class="btn btn-sm btn-primary gonder" data-toggle="tooltip" data-placement="top" title="Gönder" value="Gönder"/>
+            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mesajı Sil"><i class="fa fa-times"></i>Sil</a>
+            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Klasöre Taşı"><i class="fa fa-pencil"></i>Klasöre Taşı</a>
+        </div>
+        <div class="clearfix"></div>
+
+
+
+    </div>
+            </form>
+</div>
+</div>
+
+</div>
+
+@section script{
+    <script>
+        $(".gonder").click(function () {
+            var mesaj = $(".note-editing-area").text();
+           
+            $("#mesaj").val(mesaj);
+          
+
+        })
+        
+    </script>
+    <script src="/Admin/js/plugins/summernote/summernote-bs4.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.summernote').summernote();
+
+        });
+
+    </script>
+}
+

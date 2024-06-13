@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "BlogEkle";
+    Layout = "~/Views/Shared/Yazar_Layout.cshtml";
+}
+@using EntityLayer.Entity
+@model Blok
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Basic form elements</h4>
+            <p class="card-description"> Basic form elements </p>
+            <form class="forms-sample" action="/Yazar/BlogEkle" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleInputName1">Başlık</label>
+                    <input type="text" class="form-control" id="exampleInputName1" name="Baslik" >
+                    @Html.ValidationMessageFor(x => x.Baslik, "", new { @style = "color:red" })
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputName1">Resim</label>
+                    <input type="file" class="form-control" id="exampleInputName1" name="fileUpload"">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Kategori</label>
+                    <select class="form-control" id="exampleFormControlSelect2" name="KategoriID">
+
+                       
+                        @foreach (Kategori item in ViewBag.kat)
+                        {
+                            <option value="@item.ID">@item.Adi</option>
+                        }
+                    </select>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="exampleTextarea1">İçerik</label>
+                    <input type="text" class="form-control" id="exampleTextarea1" name="İcerik"  rows="7"></input>
+                    @Html.ValidationMessageFor(x => x.İcerik, "", new { @style = "color:red" })
+                </div>
+               
+                <input type="hidden" name="OlusturmaTarihi" value="@DateTime.Now" />
+                
+                <input type="hidden" name="UserID" value="@ViewBag.id" />
+                <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
+                <a class="btn  btn-info" href="/Yazar/Bloglarım" class="btn btn-light">İptal</a>
+            </form>
+        </div>
+    </div>
+</div>
+

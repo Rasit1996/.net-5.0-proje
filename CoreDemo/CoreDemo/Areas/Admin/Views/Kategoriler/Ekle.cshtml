@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+@using CoreDemo.Areas.Admin.Models
+@model kategori
+<form action="/Admin/Kategoriler/Ekle" method="post">
+    <div class="form-gorup">
+        <label>Kategori Adı:</label>
+        <input type="text" name="Adi" class="form-control" />
+        @Html.ValidationMessageFor(x=>x.Adi,"",new {@style="color:red"})
+        
+    </div>
+    <input type="submit" class="btn btn-success" value="Ekle" />
+</form>
+

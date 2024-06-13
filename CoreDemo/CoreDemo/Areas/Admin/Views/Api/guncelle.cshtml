@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "guncelle";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+@using CoreDemo.Areas.Admin.Controllers
+@model Personel
+<div class="form-grou">
+    <form action="/Admin/Api/guncelle" method="post">
+        <label>ID</label>
+        <wbr />
+        <input type="text" name="ID" value="@Model.ID" class="form-control" />
+        <br />
+        <label>Adı:</label>
+        <br />
+        <input type="text" class="form-control" name="Adi" value="@Model.Adi" />
+        <br />
+        <input class="btn btn-success" type="submit" value="Guncelle" />
+        </form>
+</div>
+

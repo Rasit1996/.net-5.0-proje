@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Blok Yazıları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section class="main-content-w3layouts-agileits" >
+	
+	<div class="container">
+		<h3 class="tittle">Blok Yazıları</h3>
+		<div class="inner-sec">
+			<!--left-->
+			<div class="left-blog-info-w3layouts-agileits text-left">
+				<div class="row" id="body">
+
+				@* 	@await Html.PartialAsync("blogyeni") *@
+				@await Component.InvokeAsync("BlogYazilari")
+				 
+					
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-left mt-4">
+						<li class="page-item disabled">
+							<a class="page-link" href="#" tabindex="-1">Previous</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">1</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">2</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">3</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">Next</a>
+						</li>
+					</ul>
+				</nav>
+				<!--//left-->
+			</div>
+		</div>
+	</div>
+</section>
+

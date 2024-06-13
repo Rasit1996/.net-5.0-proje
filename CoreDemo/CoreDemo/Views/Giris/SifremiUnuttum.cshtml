@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "SifremiUnuttum";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using CoreDemo.Models
+@model SubIChangePasswordUser
+@* @section head{
+    <link rel="stylesheet" href="@sweetalert2/themes/dark/dark.css">
+} *@
+<div class="row">
+    <div class="col-lg-3">
+<form class="form f" action="/Giris/SifremiUnuttum" method="post">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" name="Email" />
+        @Html.ValidationMessageFor(x=>x.Email,"",new {style="color:red"})
+        <label>Yeni Şifre</label>
+        <input type="password" name="Sifre" class="form-control" />
+                @Html.ValidationMessageFor(x => x.Sifre, "", new { style = "color:red" })
+        <label>Yeni şifre tekrar</label>
+        <input type="password" name="SifreTekrar" class="form-control" />
+                @Html.ValidationMessageFor(x => x.SifreTekrar, "", new { style = "color:red" })
+        @if (ViewBag.hata != null)
+        {
+            <span style="color:red">@ViewBag.hata</span>
+        }
+        <br />
+        <button type="submit" class="btn btn-info">Devam et</button>
+        @Html.ValidationSummary(true,"",new {sytle="color:red"})
+                
+    </div>
+</form>
+        @if (ViewBag.success != null)
+        {
+            <button onclick="success()">mesaj göster</button>
+        }
+</div>
+</div>
+
+@section script{
+    
+        <script>
+
+            window.onload = function () { success(); }
+
+
+            function success() {
+                @if(ViewBag.success!= null){
+                    <text>
+            Swal.fire({
+            title: "Tebrikler!",
+            text: "Şifreniz başarılı bir şekilde değiştirildi.",
+            icon: "success",
+            confirmButtonText:"Tamam"
+            }).then((result) => {
+            if (result.isConfirmed) {
+
+            window.location.href = "/Giris/Index";
+            }
+            });
+            </text>
+                }   
+            }
+
+            
+
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    }

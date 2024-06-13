@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+@using CoreDemo.Areas.Admin.Controllers
+@model List<Personel>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Api ile personel listesi </h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Adı</th>
+                            
+                            <th>Düzenle</th>
+                            <th>Sil</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        { 
+                            <tr>
+                                <td>@item.ID</td>
+                                <td>@item.Adi</td>
+                                
+                                <td><a href="/Admin/Api/sil/@item.ID" class="btn btn-danger sil" >Sil</a></td>
+                                <td><a href="/Admin/Api/guncelle/@item.ID" class="btn btn-info">Düzenle</a></td>
+
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+                <a href="/Admin/Api/Ekle" class="btn btn-warning">Yeni Personel Ekle</a>
+                <a href="/Admin/Dosyala/ExeleAktar" class="btn btn-info">Exel Dosyası Oluştur</a>
+                @if (ViewBag.hata!=null)
+                {
+                    <br />
+                    <label   style="color:red">@ViewBag.hata</label>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
